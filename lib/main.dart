@@ -39,55 +39,81 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        const Expanded(
-            flex: 1,
-            child: Padding(
-              padding: EdgeInsets.only(top: 15),
-              child: CircleAvatar(
-                  radius: 100, foregroundImage: AssetImage("images/aa.jpg")),
-            )),
         Expanded(
-          flex: 3,
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
+          flex: 1,
+          child: Container(
+            // Place as the child widget of a scaffold
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(
+                    "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/backgrounds%2Fgradienta-m_7p45JfXQo-unsplash.jpg?alt=media&token=adc01da9-3e54-48af-91c3-d1b303498618"),
+                fit: BoxFit.cover,
+              ),
+            ),
             child: Column(
               children: [
-                ProfileItem(
-                  title: "Ad/Soyad",
-                ),
-                ProfileItem(
-                  title: "Email",
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: ProfileItem(
-                        title: "Yaş",
-                      ),
+                const Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: CircleAvatar(
+                          radius: 100,
+                          foregroundImage: AssetImage("images/aa.jpg")),
+                    )),
+                Expanded(
+                  flex: 3,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      children: [
+                        ProfileItem(
+                          title: "Ad/Soyad",
+                        ),
+                        ProfileItem(
+                          title: "Email",
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: ProfileItem(
+                                title: "Yaş",
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: ProfileItem(
+                                title: "Adres",
+                              ),
+                            ),
+                          ],
+                        ),
+                        ProfileItem(
+                          title: "İstekler",
+                          icon: Icons.arrow_forward_ios_rounded,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                                flex: 1, child: ProfileItem(title: "İlanlar")),
+                            Expanded(
+                                flex: 1,
+                                child: ProfileItem(
+                                  title: "Çıkış Yap",
+                                  icon: Icons.logout,
+                                ))
+                          ],
+                        )
+                      ],
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: ProfileItem(
-                        title: "Adres",
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-                ProfileItem(
-                  title: "İstekler",
-                  icon: Icons.arrow_forward_ios_rounded,
-                ),
-                Row(
-                  children: [
-                    Expanded(flex: 1, child: ProfileItem(title: "İlanlar")),
-                    Expanded(flex: 1, child: ProfileItem(title: "Çıkış Yap"))
-                  ],
-                )
               ],
-            ),
+            ), // Place child here
           ),
-        ),
+        )
       ]),
     );
   }
@@ -117,14 +143,15 @@ class ProfileItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.only(left: 25),
                 child: Text(
                   title,
                   textAlign: TextAlign.left,
+                  style: TextStyle(fontSize: 18),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 10),
+                padding: const EdgeInsets.only(right: 25),
                 child: Icon(icon),
               )
             ],
