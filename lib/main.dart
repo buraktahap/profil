@@ -32,9 +32,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple,
+      backgroundColor: Colors.blueGrey,
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+        ),
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         const Expanded(
@@ -49,23 +51,39 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(
-              children: const [
+              children: [
                 ProfileItem(
-                  title: "ad/soyad",
+                  title: "Ad/Soyad",
                 ),
                 ProfileItem(
-                  title: "email",
+                  title: "Email",
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: ProfileItem(
+                        title: "Yaş",
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: ProfileItem(
+                        title: "Adres",
+                      ),
+                    ),
+                  ],
                 ),
                 ProfileItem(
-                  title: "yaş",
-                ),
-                ProfileItem(
-                  title: "adres",
-                ),
-                ProfileItem(
-                  title: "istekler",
+                  title: "İstekler",
                   icon: Icons.arrow_forward_ios_rounded,
                 ),
+                Row(
+                  children: [
+                    Expanded(flex: 1, child: ProfileItem(title: "İlanlar")),
+                    Expanded(flex: 1, child: ProfileItem(title: "Çıkış Yap"))
+                  ],
+                )
               ],
             ),
           ),
