@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart'; // resim ekleme kütüphanesi
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +23,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
+Image _image = Image.asset('images/aa.jpg');
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
@@ -29,6 +34,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  PickedFile? _imageFile;
+  final ImagePicker _picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,13 +61,22 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                     flex: 1,
                     child: Padding(
                       padding: EdgeInsets.only(top: 15),
-                      child: CircleAvatar(
+                      child: GestureDetector(
+                        child: CircleAvatar(
                           radius: 100,
-                          foregroundImage: AssetImage("images/aa.jpg")),
+                          backgroundImage: _imageFile == null?
+                               FileImage(File(_imageFile!.path))
+                                  as ImageProvider
+                              : AssetImage("images/aa.jpg"),
+                        ),
+                        onTap: () {
+                          takePhoto(ImageSource.gallery);
+                        },
+                      ),
                     )),
                 Expanded(
                   flex: 3,
@@ -116,6 +132,15 @@ class _MyHomePageState extends State<MyHomePage> {
         )
       ]),
     );
+  }
+
+  void takePhoto(ImageSource source) async {
+    final pickedFile = await _picker.getImage(
+      source: source,
+    );
+    setState(() {
+      _imageFile = pickedFile;
+    });
   }
 }
 
